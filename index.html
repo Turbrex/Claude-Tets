@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Counter Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Click Counter</h1>
+    <p class="subtitle">How high can you click?</p>
+
+    <div class="count" id="count">0</div>
+
+    <button id="clickBtn" class="click-btn">Click me!</button>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">Best</span>
+        <span class="stat-value" id="best">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Clicks/sec</span>
+        <span class="stat-value" id="cps">0</span>
+      </div>
+    </div>
+
+    <button id="resetBtn" class="reset-btn">Reset</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
