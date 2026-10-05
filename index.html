@@ -3,32 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Click Counter Game</title>
-<link rel="stylesheet" href="style.css">
+<title>Office Sim</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main class="card">
-    <h1>Click Counter</h1>
-    <p class="subtitle">How high can you click?</p>
-
-    <div class="count" id="count">0</div>
-
-    <button id="clickBtn" class="click-btn">Click me!</button>
-
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-label">Best</span>
-        <span class="stat-value" id="best">0</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Clicks/sec</span>
-        <span class="stat-value" id="cps">0</span>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🏢</span>
+      <div>
+        <h1 id="company">Office Sim</h1>
+        <p class="subtitle">An AI office with personalities, stress and two daily progress reports</p>
       </div>
     </div>
 
-    <button id="resetBtn" class="reset-btn">Reset</button>
+    <div class="clock">
+      <div class="clock-main"><span id="day">Day 1</span> · <span id="time">09:00</span></div>
+      <div class="clock-sub" id="nextReport">Next report at 12:00</div>
+      <div class="daybar"><div id="dayProgress"></div><span class="mark mark-noon"></span></div>
+    </div>
+
+    <div class="controls">
+      <button id="playBtn" class="primary">▶ Start</button>
+      <label class="speed">Speed
+        <select id="speed">
+          <option value="1">1×</option>
+          <option value="2" selected>2×</option>
+          <option value="4">4×</option>
+          <option value="8">8×</option>
+          <option value="16">16×</option>
+        </select>
+      </label>
+      <button id="resetBtn" title="Start over from day 1">⟲ New game</button>
+    </div>
+  </header>
+
+  <nav class="interventions" id="interventions" aria-label="Interventions"></nav>
+
+  <main class="layout">
+    <section class="panel staff" aria-label="Staff">
+      <h2>Staff</h2>
+      <div id="staff"></div>
+    </section>
+
+    <section class="panel chat" aria-label="Office chat">
+      <h2># office-general <span class="muted" id="chatCount"></span></h2>
+      <div id="chatLog" class="chat-log" aria-live="polite"></div>
+      <form id="chatForm" class="chat-form" autocomplete="off">
+        <input id="chatInput" type="text" maxlength="200" placeholder="Talk to the office as a visiting consultant… (try “@Riley how are you?” or “great job team!”)">
+        <button type="submit" class="primary">Send</button>
+      </form>
+    </section>
+
+    <aside class="panel side" aria-label="Activity">
+      <h2>Office feed</h2>
+      <ul id="feed" class="feed"></ul>
+      <h2>Progress reports</h2>
+      <ul id="reportList" class="report-list"><li class="muted">No reports yet. First one is at 12:00.</li></ul>
+      <h2>How it works</h2>
+      <ul class="help">
+        <li><b>Stress</b> drives everything: calm staff work faster and make fewer mistakes.</li>
+        <li>Entry-level work is <b>reviewed by their manager</b>. Missed errors may be found by the boss.</li>
+        <li>At <b>12:00</b> and <b>17:00</b> the boss grades everyone: bonuses and praise lower stress; reprimands and warnings raise it.</li>
+        <li><b>3 warnings</b> and you're fired — a new hire takes the desk.</li>
+        <li>Chat with them, buy coffee, or cause chaos with the buttons above.</li>
+      </ul>
+    </aside>
   </main>
 
-  <script src="script.js"></script>
+  <dialog id="reportModal" class="report-modal">
+    <div id="reportBody"></div>
+    <form method="dialog" class="modal-actions">
+      <label><input type="checkbox" id="autoContinue"> Don't pause for reports</label>
+      <button class="primary" value="ok">Continue ▶</button>
+    </form>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>
